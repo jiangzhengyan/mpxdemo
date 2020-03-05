@@ -1,0 +1,119 @@
+<template>
+  <!--  <list>试试</list>-->
+  <view>{{name}}</view>
+
+  <view>{{str}}</view>
+
+  <view>{{count}}</view>
+  <view>{{index}}</view>
+  <view>{{isCountBigThanTen}}</view>
+
+  <button bindtap="increment">点我</button>
+  <button bindtap="add">点我加</button>
+
+  <input type="text" style="margin: 12px;background:#999;padding: 12px" wx:model="{{inputVal}}"/>
+
+  <view style="margin: 12px;background:#999;padding: 12px">{{inputVal}}</view>
+
+  <view wx:for="{{listData}}">
+    <button bindtap="handleTapItem(item,$event)">第{{index}}项目{{item}}</button>
+  </view>
+
+  <component is="{{componentName}}"></component>
+
+  <button bindtap="handleShow(1)">展示1</button>
+  <button bindtap="handleShow(2)">展示2</button>
+  <button bindtap="handleShow(3)">展示3</button>
+
+
+</template>
+
+<script>
+  import {createPage} from '@mpxjs/core'
+  import store from "../store";
+
+
+  createPage({
+    data: {
+      name: 1,
+      str: '这是字符串',
+      inputVal: ''
+      ,
+      listData: [111, 222, 333, 444, 555, 666, 777, 888],
+      componentName: 'list'
+    },
+    methods: {
+      ...store.mapMutations(['increment', 'add']),
+      ...store.mapActions(["addAsync"]),
+      handleTap() {
+
+        // store.commit('increment')
+      },
+      add() {
+        // store.commit('add',3)
+        // store.dispatch('addAsync',10)
+      },
+      handleTapItem(item, e) {
+        console.log(item, e);
+      },
+      handleShow(i) {
+        switch (i) {
+          case 1 :
+            this.componentName = 'list'
+            break
+          case 2 :
+            this.componentName = 'list2'
+            break
+          case 3 :
+            this.componentName = 'list3'
+            break
+
+        }
+      }
+    },
+    onLoad() {
+      // this.setData({
+      //   name : "李四"
+      // })
+      // this.name='哈喽'
+      var num = 0
+      setInterval(r => {
+        // this.name=this.name+58496521
+        num++
+        this.name += 1
+
+      }, 1000)
+
+    },
+    watch: {
+      name(na) {
+        if (na > 10) {
+          console.log(na, '收拾 收拾')
+        }
+      }
+    },
+    computed: {
+      ...store.mapState(['count', 'index']),
+      ...store.mapGetters(["isCountBigThanTen"]),
+
+      // 或者
+
+      // count (){
+      //   return store.state.count
+      // },
+      str() {
+        return '这是第' + this.name
+      }
+    }
+  })
+</script>
+
+<script type="application/json">
+  {
+    "usingComponents": {
+      "list": "../components/list",
+      "list2": "../components/list2",
+      "list3": "../components/list3"
+    }
+  }
+</script>
