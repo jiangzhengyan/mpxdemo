@@ -39,7 +39,7 @@
       str: '这是字符串',
       inputVal: ''
       ,
-      listData: [111, 222, 333, 444, 555, 666, 777, 888],
+      listData: [111, 222, 333, 444, 555, 666, 777, 888, 999],
       componentName: 'list'
     },
     methods: {
