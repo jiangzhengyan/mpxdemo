@@ -1,4 +1,7 @@
 <template>
+  <view class="container">
+    <view class="item">0000000000000</view>
+  </view>
   <!--  <list>试试</list>-->
   <view>{{name}}</view>
 
@@ -27,6 +30,17 @@
 
 
 </template>
+<style lang="stylus">
+  .container
+    background-color red
+    display flex
+    min-height 500px
+    .item
+      height 200px
+      background-color blue
+      width 100%
+
+</style>
 
 <script>
   import {createPage} from '@mpxjs/core'
